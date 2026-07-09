@@ -38,7 +38,7 @@ export default function Nosotros() {
                 Lashista, cosmetóloga y esteticista
               </p>
               <BodyText className="text-sm">
-                Con más de 5 años de experiencia transformando la confianza de mis clientas a través del cuidado
+                Con más de 4 años de experiencia transformando la confianza de mis clientas a través del cuidado
                 consciente de la piel y la belleza, fundé Smuk Studio con una idea clara: cada persona merece una
                 atención hecha a su medida.
               </BodyText>

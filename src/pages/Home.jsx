@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FadeUp, SectionEyebrow, Divider, SeriffH2, BodyText, BtnPrimary, BtnOutline, BtnLight } from "../components/UI";
+import { FadeUp, SectionEyebrow, Divider, SeriffH2, BodyText, BtnPrimary, BtnOutline } from "../components/UI";
 import { extensiones, lifting, cejas, WA_BASE } from "../data/content";
 
 const WA_MAIN =
@@ -10,12 +10,12 @@ const WA_MAIN =
   );
 
 const serviciosPreview = [
-  extensiones[0],
-  extensiones[2],
-  extensiones[5],
-  lifting,
-  cejas[3],
-  cejas[0],
+  { ...extensiones[0], categoria: "Extensiones de Pestañas" },
+  { ...extensiones[2], categoria: "Extensiones de Pestañas" },
+  { ...extensiones[5], categoria: "Extensiones de Pestañas" },
+  { ...lifting, categoria: "Lifting de Pestañas" },
+  { ...cejas[3], categoria: "Cejas" },
+  { ...cejas[0], categoria: "Cejas" },
 ];
 
 function WaIcon({ size = 16 }) {
@@ -36,7 +36,6 @@ function IgIcon({ size = 16 }) {
   );
 }
 
-// Botón con icono reutilizable
 function BtnIcon({ href, to, children, icon, outlined = false }) {
   const baseStyle = {
     fontFamily: '"DM Sans", sans-serif',
@@ -55,49 +54,21 @@ function BtnIcon({ href, to, children, icon, outlined = false }) {
     background: outlined ? "transparent" : "#2C2420",
     color: outlined ? "#2C2420" : "#F5F0E8",
   };
-
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noreferrer" style={baseStyle}>
-        {icon}
-        {children}
-      </a>
-    );
-  }
-  return (
-    <Link to={to} style={baseStyle}>
-      {icon}
-      {children}
-    </Link>
-  );
+  if (href) return <a href={href} target="_blank" rel="noreferrer" style={baseStyle}>{icon}{children}</a>;
+  return <Link to={to} style={baseStyle}>{icon}{children}</Link>;
 }
 
-// BtnLight con icono para CTA sobre fondo oscuro
 function BtnLightIcon({ href, children, icon }) {
   return (
-    
-      <a href={href}
-      target="_blank"
-      rel="noreferrer"
+    <a href={href} target="_blank" rel="noreferrer"
       style={{
-        fontFamily: '"DM Sans", sans-serif',
-        fontSize: "0.7rem",
-        fontWeight: 500,
-        letterSpacing: "0.2em",
-        textTransform: "uppercase",
-        background: "transparent",
-        color: "#F5F0E8",
-        padding: "13px 28px",
-        textDecoration: "none",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "9px",
-        border: "1px solid #F5F0E8",
-        lineHeight: 1,
-      }}
-    >
-      {icon}
-      {children}
+        fontFamily: '"DM Sans", sans-serif', fontSize: "0.7rem", fontWeight: 500,
+        letterSpacing: "0.2em", textTransform: "uppercase", background: "transparent",
+        color: "#F5F0E8", padding: "13px 28px", textDecoration: "none",
+        display: "inline-flex", alignItems: "center", gap: "9px",
+        border: "1px solid #F5F0E8", lineHeight: 1,
+      }}>
+      {icon}{children}
     </a>
   );
 }
@@ -106,10 +77,8 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section
-        className="min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center"
-        style={{ background: "#F5F0E8" }}
-      >
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center"
+        style={{ background: "#F5F0E8" }}>
         <FadeUp className="flex flex-col items-center">
           <SectionEyebrow>Bogotá, Colombia</SectionEyebrow>
           <div style={{ width: "1px", height: "52px", background: "#B8A99A", margin: "20px auto" }} />
@@ -125,11 +94,7 @@ export default function Home() {
           </BodyText>
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <Link to="/servicios"><BtnPrimary>Ver servicios</BtnPrimary></Link>
-            <BtnIcon
-              href={WA_MAIN}
-              outlined
-              icon={<WaIcon size={15} />}
-            >
+            <BtnIcon href={WA_MAIN} outlined icon={<WaIcon size={15} />}>
               Reservar cita
             </BtnIcon>
           </div>
@@ -171,24 +136,30 @@ export default function Home() {
             </BodyText>
           </FadeUp>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 items-stretch">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mb-10 items-stretch">
             {serviciosPreview.map((s, i) => (
               <FadeUp key={s.id} delay={i * 60} className="h-full">
                 <Link to={`/servicios/${s.slug}`} className="block group h-full" style={{ textDecoration: "none" }}>
                   <div className="h-full flex flex-col overflow-hidden transition-all duration-300 group-hover:-translate-y-1"
                     style={{ background: "#FDFAF6", border: "1px solid #EDE5D8" }}>
                     <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: "4/3" }}>
-                      <img src={s.image} alt={s.nombre} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(44,36,32,0.45) 0%, transparent 55%)" }} />
+                      <img src={s.image} alt={s.nombre}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <div className="absolute inset-0"
+                        style={{ background: "linear-gradient(to top, rgba(44,36,32,0.45) 0%, transparent 55%)" }} />
                       <div className="absolute bottom-3 left-4">
-                        <p style={{ fontFamily: '"Pinyon Script", cursive', fontSize: "1.4rem", color: "#F5F0E8", lineHeight: 1 }}>{s.nombre}</p>
+                        <p style={{ fontFamily: '"Pinyon Script", cursive', fontSize: "1.4rem", color: "#F5F0E8", lineHeight: 1 }}>
+                          {s.nombre}
+                        </p>
                         {s.subtitulo && (
-                          <p style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.55rem", color: "#D9CEBA", letterSpacing: "0.18em", textTransform: "uppercase" }}>{s.subtitulo}</p>
+                          <p style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.55rem", color: "#D9CEBA", letterSpacing: "0.18em", textTransform: "uppercase" }}>
+                            {s.subtitulo}
+                          </p>
                         )}
                       </div>
                     </div>
-                    <div className="p-4 flex flex-col flex-1">
-                      <BodyText className="text-xs flex-1">{s.shortDesc}</BodyText>
+                    <div className="p-3 md:p-4 flex flex-col flex-1">
+                      <BodyText className="text-xs flex-1 hidden sm:block">{s.shortDesc}</BodyText>
                       <p className="mt-2 text-xs font-medium" style={{ fontFamily: '"DM Sans", sans-serif', color: "#2C2420" }}>
                         {s.precios?.set ? `Set ${s.precios.set}` : s.precios?.unico ? s.precios.unico : s.precios?.conDiseno ? `Desde ${s.precios.conDiseno}` : ""}
                       </p>
@@ -213,25 +184,18 @@ export default function Home() {
             <SeriffH2>Lo que dicen nuestras clientas</SeriffH2>
             <Divider className="mt-5 mb-6" />
             <BodyText className="text-sm mb-8">
-              ¿Ya viviste la experiencia Smuk? Encuentra nuestras reseñas en Instagram y Google, o cuéntanos directamente cómo te fue.
+              ¿Ya viviste la experiencia Smuk? Encuentra nuestras reseñas en Instagram o cuéntanos directamente cómo te fue.
             </BodyText>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <BtnIcon
-                href="https://www.instagram.com/smukstudio__/"
-                icon={<IgIcon size={15} />}
-              >
+              <BtnIcon href="https://www.instagram.com/smukstudio__/" icon={<IgIcon size={15} />}>
                 Ver en Instagram
               </BtnIcon>
-              <BtnIcon
-                to="/testimonios"
-                outlined
-                icon={
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-                      stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
-                  </svg>
-                }
-              >
+              <BtnIcon to="/testimonios" outlined icon={
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                    stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+                </svg>
+              }>
                 Dejar una reseña
               </BtnIcon>
             </div>
@@ -250,22 +214,17 @@ export default function Home() {
               Desde cómo reservar hasta cuánto duran las extensiones — resolvemos todo antes de tu cita.
             </BodyText>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <BtnIcon
-                to="/faq"
-                icon={
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                    <path d="M12 16v-4M12 8h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                }
-              >
+              <BtnIcon to="/faq" icon={
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                  <path d="M12 16v-4M12 8h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              }>
                 Ver preguntas frecuentes
               </BtnIcon>
               <BtnIcon
-                href={WA_MAIN}
-                outlined
-                icon={<WaIcon size={15} />}
-              >
+                href={"https://api.whatsapp.com/send/?phone=573227665148&text=" + encodeURIComponent("Hola Valentina! Tengo una pregunta sobre tus servicios en Smuk Studio. ¿Me puedes ayudar? 😊") + "&type=phone_number&app_absent=0&utm_source=web"}
+                outlined icon={<WaIcon size={15} />}>
                 Preguntar por WhatsApp
               </BtnIcon>
             </div>

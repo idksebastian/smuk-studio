@@ -147,22 +147,27 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile — oculto en desktop, SIN display en style para que lg:hidden funcione */}
-          
-            <a href={WA_NAV}
-            target="_blank"
-            rel="noreferrer"
-            className="lg:hidden"
-            style={{
-              fontFamily: '"DM Sans", sans-serif', fontSize: "0.6rem", fontWeight: 500,
-              letterSpacing: "0.18em", textTransform: "uppercase",
-              background: "#2C2420", color: "#F5F0E8", padding: "8px 16px",
-              textDecoration: "none", alignItems: "center", gap: "7px",
-            }}
-          >
-            <WaIcon size={13} color="#F5F0E8" />
-            Reservar
-          </a>
+          {/* Mobile — oculto en desktop */}
+
+  <a href={WA_NAV}
+  target="_blank"
+  rel="noreferrer"
+  className="lg:hidden inline-flex items-center gap-2"
+  style={{
+    fontFamily: '"DM Sans", sans-serif',
+    fontSize: "0.6rem",
+    fontWeight: 500,
+    letterSpacing: "0.18em",
+    textTransform: "uppercase",
+    background: "#2C2420",
+    color: "#F5F0E8",
+    padding: "8px 16px",
+    textDecoration: "none",
+  }}
+>
+  <WaIcon size={13} color="#F5F0E8" />
+  Reservar
+</a>
         </div>
       </nav>
 
