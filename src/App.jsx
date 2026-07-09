@@ -5,14 +5,15 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Nosotros from "./pages/Nosotros";
 import { Servicios, ServicioDetalle } from "./pages/Servicios";
-import Actividades from "./pages/Actividades";
 import Testimonios from "./pages/Testimonios";
-import ClienteIdeal from "./pages/ClienteIdeal";
+import FAQ from "./pages/FAQ";
 import Contacto from "./pages/Contacto";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
   return null;
 }
 
@@ -27,9 +28,8 @@ function Layout() {
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/servicios/:slug" element={<ServicioDetalle />} />
-          <Route path="/actividades" element={<Actividades />} />
           <Route path="/testimonios" element={<Testimonios />} />
-          <Route path="/cliente-ideal" element={<ClienteIdeal />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/contacto" element={<Contacto />} />
         </Routes>
       </main>

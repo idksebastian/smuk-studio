@@ -3,7 +3,7 @@ import { activities } from "../data/content";
 
 export default function Actividades() {
   return (
-    <div className="pt-24" style={{ background: "#F5F0E8" }}>
+    <div style={{ background: "#F5F0E8" }}>
       <section className="py-16 px-6 text-center" style={{ background: "#EDE5D8" }}>
         <FadeUp>
           <SectionEyebrow>Estrategia comercial</SectionEyebrow>
@@ -21,7 +21,6 @@ export default function Actividades() {
             <FadeUp key={a.id} delay={i * 80}>
               <div className="p-7 md:p-10" style={{ background: "#FDFAF6", border: "1px solid #EDE5D8" }}>
                 <div className="grid md:grid-cols-4 gap-6">
-                  {/* Left */}
                   <div className="md:col-span-1 flex flex-col">
                     <SectionEyebrow>Actividad {a.number}</SectionEyebrow>
                     <p className="mt-2" style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, fontSize: "1.4rem", color: "#2C2420", lineHeight: 1.2 }}>
@@ -34,8 +33,6 @@ export default function Actividades() {
                       <CalendarButton activity={a} />
                     </div>
                   </div>
-
-                  {/* Right */}
                   <div className="md:col-span-3 space-y-4">
                     <div>
                       <p className="mb-1" style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.65rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#B8A99A" }}>

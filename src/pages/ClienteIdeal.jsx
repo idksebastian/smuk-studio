@@ -8,27 +8,10 @@ function PersonaBlock({ title, items }) {
       <ul className="mt-4 space-y-3">
         {items.map((item) => (
           <li key={item.label} className="flex gap-2">
-            <span
-              style={{
-                fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.78rem",
-                fontWeight: 500,
-                color: "#2C2420",
-                minWidth: "90px",
-                flexShrink: 0,
-              }}
-            >
+            <span style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.78rem", fontWeight: 500, color: "#2C2420", minWidth: "90px", flexShrink: 0 }}>
               {item.label}
             </span>
-            <span
-              style={{
-                fontFamily: '"DM Sans", sans-serif',
-                fontSize: "0.78rem",
-                fontWeight: 300,
-                color: "#7C6A5E",
-                lineHeight: 1.5,
-              }}
-            >
+            <span style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.78rem", fontWeight: 300, color: "#7C6A5E", lineHeight: 1.5 }}>
               {item.value}
             </span>
           </li>
@@ -40,7 +23,7 @@ function PersonaBlock({ title, items }) {
 
 export default function ClienteIdeal() {
   return (
-    <div className="pt-24" style={{ background: "#F5F0E8" }}>
+    <div style={{ background: "#F5F0E8" }}>
       <section className="py-16 px-6 text-center" style={{ background: "#EDE5D8" }}>
         <FadeUp>
           <SectionEyebrow>Buyer Persona</SectionEyebrow>
@@ -55,16 +38,9 @@ export default function ClienteIdeal() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <FadeUp>
-            <div
-              className="p-8 md:p-12"
-              style={{ background: "#FDFAF6", border: "1px solid #EDE5D8" }}
-            >
-              {/* Avatar header */}
+            <div className="p-8 md:p-12" style={{ background: "#FDFAF6", border: "1px solid #EDE5D8" }}>
               <div className="flex flex-col sm:flex-row gap-6 items-start mb-10">
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden"
-                  style={{ background: "#D9CEBA" }}
-                >
+                <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: "#D9CEBA" }}>
                   <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
                     <circle cx="40" cy="40" r="40" fill="#D9CEBA" />
                     <ellipse cx="40" cy="30" rx="14" ry="17" fill="#E8D5C4" />
@@ -73,40 +49,20 @@ export default function ClienteIdeal() {
                   </svg>
                 </div>
                 <div>
-                  <p
-                    style={{
-                      fontFamily: '"Cormorant Garamond", serif',
-                      fontStyle: "italic",
-                      fontSize: "2rem",
-                      fontWeight: 300,
-                      color: "#2C2420",
-                      lineHeight: 1,
-                    }}
-                  >
+                  <p style={{ fontFamily: '"Cormorant Garamond", serif', fontStyle: "italic", fontSize: "2rem", fontWeight: 300, color: "#2C2420", lineHeight: 1 }}>
                     {buyerPersona.name}
                   </p>
-                  <p
-                    className="mt-1"
-                    style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.8rem", color: "#B8A99A" }}
-                  >
+                  <p className="mt-1" style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.8rem", color: "#B8A99A" }}>
                     {buyerPersona.subtitle}
                   </p>
-                  <p
-                    className="mt-3 max-w-lg"
-                    style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.82rem", color: "#7C6A5E", lineHeight: 1.6, fontWeight: 300 }}
-                  >
+                  <p className="mt-3 max-w-lg" style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.82rem", color: "#7C6A5E", lineHeight: 1.6, fontWeight: 300 }}>
                     Mujer joven que se toma en serio su bienestar y su imagen, sin caer en exageraciones.
                     Valora la autenticidad, la higiene y la personalización. Decide con base en recomendaciones de
                     confianza y contenido real en redes.
                   </p>
                 </div>
               </div>
-
-              {/* 3 columns */}
-              <div
-                className="pt-8 grid md:grid-cols-3 gap-8"
-                style={{ borderTop: "1px solid #EDE5D8" }}
-              >
+              <div className="pt-8 grid md:grid-cols-3 gap-8" style={{ borderTop: "1px solid #EDE5D8" }}>
                 <PersonaBlock title="Variables demográficas" items={buyerPersona.demographic} />
                 <PersonaBlock title="Variables psicográficas" items={buyerPersona.psychographic} />
                 <PersonaBlock title="Variables comportamentales" items={buyerPersona.behavioral} />
@@ -114,7 +70,6 @@ export default function ClienteIdeal() {
             </div>
           </FadeUp>
 
-          {/* Pain / Gains */}
           <div className="grid md:grid-cols-2 gap-5 mt-8">
             <FadeUp>
               <div className="p-7" style={{ background: "#FDF8F2", border: "1px solid #EDE5D8" }}>

@@ -31,13 +31,59 @@ export function BodyText({ children, className = "" }) {
 }
 
 export function BtnPrimary({ children, href, onClick, className = "" }) {
-  const style = { fontFamily: '"DM Sans", sans-serif', fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", background: "#2C2420", color: "#F5F0E8", padding: "14px 32px", display: "inline-block", textDecoration: "none", cursor: "pointer", border: "none" };
+  const style = {
+    fontFamily: '"DM Sans", sans-serif',
+    fontSize: "0.7rem",
+    fontWeight: 500,
+    letterSpacing: "0.2em",
+    textTransform: "uppercase",
+    background: "#2C2420",
+    color: "#F5F0E8",
+    padding: "14px 32px",
+    display: "inline-block",
+    textDecoration: "none",
+    cursor: "pointer",
+    border: "none",
+  };
   if (href) return <a href={href} target="_blank" rel="noreferrer" style={style} className={className}>{children}</a>;
   return <button style={style} onClick={onClick} className={className}>{children}</button>;
 }
 
 export function BtnOutline({ children, href, onClick, className = "" }) {
-  const style = { fontFamily: '"DM Sans", sans-serif', fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", border: "1px solid #2C2420", color: "#2C2420", padding: "13px 32px", display: "inline-block", textDecoration: "none", cursor: "pointer", background: "transparent" };
+  const style = {
+    fontFamily: '"DM Sans", sans-serif',
+    fontSize: "0.7rem",
+    fontWeight: 500,
+    letterSpacing: "0.2em",
+    textTransform: "uppercase",
+    border: "1px solid #2C2420",
+    color: "#2C2420",
+    padding: "13px 32px",
+    display: "inline-block",
+    textDecoration: "none",
+    cursor: "pointer",
+    background: "transparent",
+  };
+  if (href) return <a href={href} target="_blank" rel="noreferrer" style={style} className={className}>{children}</a>;
+  return <button style={style} onClick={onClick} className={className}>{children}</button>;
+}
+
+// Botón para usar sobre fondos oscuros (#2C2420)
+export function BtnLight({ children, href, onClick, className = "" }) {
+  const style = {
+    fontFamily: '"DM Sans", sans-serif',
+    fontSize: "0.7rem",
+    fontWeight: 500,
+    letterSpacing: "0.2em",
+    textTransform: "uppercase",
+    background: "transparent",
+    color: "#F5F0E8",
+    padding: "13px 32px",
+    display: "inline-block",
+    textDecoration: "none",
+    cursor: "pointer",
+    border: "1px solid #F5F0E8",
+  };
   if (href) return <a href={href} target="_blank" rel="noreferrer" style={style} className={className}>{children}</a>;
   return <button style={style} onClick={onClick} className={className}>{children}</button>;
 }
@@ -66,25 +112,23 @@ export function FadeUp({ children, className = "", delay = 0 }) {
   );
 }
 
-// Detects OS and opens the right calendar without asking the user
 function openCalendar(activity) {
   const formatDate = (dateStr, time) => {
     const [y, m, d] = dateStr.split("-");
     const [h, min] = time.split(":");
     return `${y}${m}${d}T${h}${min}00`;
   };
-
   const start = formatDate(activity.date, activity.startTime);
   const end = formatDate(activity.date, activity.endTime);
   const title = encodeURIComponent(`Smuk Studio — ${activity.name}`);
   const details = encodeURIComponent(activity.consists);
   const location = encodeURIComponent(activity.location);
-
   const ua = navigator.userAgent;
-  const isApple = /iPhone|iPad|iPod|Macintosh/i.test(ua) && !/Chrome/i.test(ua);
-
-  if (isApple) {
-    // Apple devices → download .ics which iOS/macOS opens natively in Calendar
+  const isAppleSafari =
+    /Macintosh|iPhone|iPad|iPod/.test(ua) &&
+    /Safari/.test(ua) &&
+    !/Chrome|CriOS|FxiOS|EdgiOS/.test(ua);
+  if (isAppleSafari) {
     const icsContent = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
@@ -97,7 +141,6 @@ function openCalendar(activity) {
       "END:VEVENT",
       "END:VCALENDAR",
     ].join("\r\n");
-
     const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -106,7 +149,6 @@ function openCalendar(activity) {
     a.click();
     URL.revokeObjectURL(url);
   } else {
-    // Android, Windows, Linux → Google Calendar
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
     window.open(googleUrl, "_blank", "noreferrer");
   }

@@ -7,6 +7,10 @@
 html { scroll-behavior: smooth; }
 body { background-color: #F5F0E8; color: #2C2420; font-family: 'DM Sans', sans-serif; }
 
+main {
+  padding-top: 65px;
+}
+
 .fade-up {
   opacity: 0;
   transform: translateY(24px);
